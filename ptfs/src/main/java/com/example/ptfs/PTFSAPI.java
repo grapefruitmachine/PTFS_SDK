@@ -18,6 +18,12 @@ public class PTFSAPI {
         return Str2Res(resStr);
     }
 
+    public static Response PTFSInitBootstrap(String bootStrap, String repoPath) {
+        String resStr = PTFSLIB.InitBootStrap(bootStrap, repoPath);
+
+        return Str2Res(resStr);
+    }
+
     public static Response PTFSStartDaemon(String repoPath) {
         String resStr = PTFSLIB.StartDaemon(repoPath);
 
@@ -40,10 +46,30 @@ public class PTFSAPI {
         return Str2Res(resStr);
     }
 
-    public static Response PTFSUpload(String filePath, String repoPath, boolean isDir) {
-        String resStr = PTFSLIB.Upload(filePath, repoPath, isDir);
+    public static Response PTFSGetPathSize(String filePath, boolean isDir) {
+        String resStr = PTFSLIB.GetPathSize(filePath, isDir);
 
         return Str2Res(resStr);
+    }
+
+    public static Response PTFSUpload(String filePath, String repoPath, int size, boolean isDir) {
+        String resStr = PTFSLIB.Upload(filePath, repoPath, size, isDir);
+
+        return Str2Res(resStr);
+    }
+
+    public static void PTFSCancelUpload(int taskId) {
+        PTFSLIB.CancelUpload(taskId);
+    }
+
+    public static Response PTFSGetUploadSize(int taskId) {
+        String resStr = PTFSLIB.GetUploadSize(taskId);
+
+        return Str2Res(resStr);
+    }
+
+    public static void PTFSClearUploadInfo(int taskId) {
+        PTFSLIB.ClearUploadInfo(taskId);
     }
 
     public static Response PTFSDownload(String fileHash, String filePath, String repoPath) {
@@ -52,14 +78,14 @@ public class PTFSAPI {
         return Str2Res(resStr);
     }
 
-    public static int PTFSGetDownloadSize(String fileHash) {
-        int size = PTFSLIB.GetDownloadSize(fileHash);
+    public static int PTFSGetDownloadSize(int taskId) {
+        int size = PTFSLIB.GetDownloadSize(taskId);
 
         return size;
     }
 
-    public static void PTFSClearDownloadInfo(String fileHash) {
-        PTFSLIB.ClearDownloadInfo(fileHash);
+    public static void PTFSClearDownloadInfo(int taskId) {
+        PTFSLIB.ClearDownloadInfo(taskId);
     }
 
     public static Response PTFSCancelDownload(String fileHash, String repoPath) {
@@ -76,6 +102,12 @@ public class PTFSAPI {
 
     public static Response PTFSClearCache(String repoPath) {
         String resStr = PTFSLIB.ClearCache(repoPath);
+
+        return Str2Res(resStr);
+    }
+
+    public static Response PTFSGetBandWidth(String repoPath) {
+        String resStr = PTFSLIB.GetBandWidth(repoPath);
 
         return Str2Res(resStr);
     }
